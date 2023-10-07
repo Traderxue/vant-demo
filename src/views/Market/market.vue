@@ -79,6 +79,7 @@
     height: 100%;
 }
 .container{
+    height: 100vh;
     display: flex;
     justify-content: space-between;
     padding-bottom: 70px;
