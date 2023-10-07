@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from "vue";
+import {useRouter} from 'vue-router'
 
+
+const router = useRouter()
 
 const onClickLeft =()=>{
 
@@ -15,6 +18,10 @@ const images = ref([
     ]);
 
 
+
+const toTrade = ()=>{
+    router.push('/trade')
+}
 </script>
 
 <template>
@@ -89,7 +96,7 @@ const images = ref([
                 <van-col span="8">涨跌幅</van-col>
                 </van-row>
             </div>
-            <div>
+            <div @click="toTrade">
                 <van-row>
                 <van-col span="8">BTC/USDT</van-col>
                 <van-col span="8">29846.16</van-col>

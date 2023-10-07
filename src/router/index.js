@@ -29,6 +29,10 @@ const router = createRouter({
         }
       ]
     },
+    {
+      path:"/trade",
+      component:()=>import("@/components/trade.vue")
+    }
     
   ]
 })
