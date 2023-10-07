@@ -1,0 +1,239 @@
+<script setup>
+import { ref } from "vue";
+
+
+const onClickLeft =()=>{
+
+}
+
+const onClickRight =()=>{
+
+}
+const images = ref([
+      'http://127.0.0.1:5173/banner1.png',
+      'http://127.0.0.1:5173/banner2.png',
+    ]);
+
+
+</script>
+
+<template>
+    <div class="container">
+        <div class="headerbox">
+            <div class="header">
+                <span class="material-symbols-outlined">
+                menu
+                </span>
+                <p>首页</p>
+                <span class="material-symbols-outlined">
+                public
+                </span>
+            </div>
+            <div class="hedaer_con">
+                <span>Converted Assets</span>
+                <p>86462.21<span>≈946423.20USD</span></p>
+            </div>
+        </div>
+        <div class="swap">
+            <van-swipe :autoplay="3000" lazy-render>
+            <van-swipe-item v-for="(image,index) in images" :key="index">
+                <img :src="image" />
+            </van-swipe-item>
+            </van-swipe>
+        </div>
+        <div class="notice">
+            <van-notice-bar
+                color="#f5f5f5" 
+                background="#08162D"
+                left-icon="volume-o"
+                text="无论我们能活多久，我们能够享受的只有无法分割的此刻，此外别无其他。"
+                />
+        </div>
+        <div class="grid">
+            <div>
+                <img src="@/assets/img/icon1.png" alt="">
+                <p>充值</p>
+            </div>
+            <div>
+                <img src="@/assets/img/icon2.png" alt="">
+                <p>充值</p>
+            </div>
+            <div>
+                <img src="@/assets/img/icon3.png" alt="">
+                <p>充值</p>
+            </div>
+            <div>
+                <img src="@/assets/img/icon4.png" alt="">
+                <p>充值</p>
+            </div>
+        </div>
+        <h3>Quanitfied Robot</h3>
+        <div class="robot">
+            <div>
+                <span>25.00</span>
+                <p>Monthly Interest Rate</p>
+                <span>BNB</span>
+            </div>
+            <div>
+                <span>25.00</span>
+                <p>Monthly Interest Rate</p>
+                <span>BNB</span>
+            </div>
+        </div>
+        <h3>Market Trend</h3>
+        <div class="trend">
+            <div>
+                <van-row>
+                <van-col span="8">种类</van-col>
+                <van-col span="8">价格</van-col>
+                <van-col span="8">涨跌幅</van-col>
+                </van-row>
+            </div>
+            <div>
+                <van-row>
+                <van-col span="8">BTC/USDT</van-col>
+                <van-col span="8">29846.16</van-col>
+                <van-col span="8">
+                    <button>+1.6%</button>
+                </van-col>
+                </van-row>
+            </div>
+            <div>
+                <van-row>
+                <van-col span="8">ETH/USDT</van-col>
+                <van-col span="8">29846.16</van-col>
+                <van-col span="8">
+                    <button>+1.6%</button>
+                </van-col>
+                </van-row>
+            </div>
+            <div>
+                <van-row>
+                <van-col span="8">BTC/USDT</van-col>
+                <van-col span="8">29846.16</van-col>
+                <van-col span="8">
+                    <button>+1.6%</button>
+                </van-col>
+                </van-row>
+            </div>
+        </div>
+    </div>
+   
+</template>
+
+<style scoped lang="scss">
+.container{
+    background: #08162D;
+    width: auto;
+    height: auto;
+    padding: 15px 15px 70px 15px;
+    .header{
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+        font-weight: 600;
+
+    }
+    .headerbox{
+        color: #f5f5f5;
+        width: auto;
+        height: 180px;
+        background: #296DF1;
+        margin: -15px;
+        padding: 15px;
+        border-radius: 0px 0px 35px 35px;
+    }
+    .hedaer_con{
+        font-weight: 600;
+        margin-top: 40px;
+        span{
+            font-size: 16px;
+        }
+        p{
+            font-size: 20px;
+            padding-top: 10px;
+        }
+    }
+    .swap{
+        width: 90%;
+        height: 140px;
+        margin: 0 auto;;
+        background: skyblue;
+        margin-top: -50px;
+        border-radius: 5px;
+        overflow: hidden;
+        img{
+            width: 100%;
+            height: 140px;
+        }
+    }
+    .notice{
+        margin-top: 15px;
+    }
+    .grid{
+        width: auto;
+        height: 73px;
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-around;
+        color: #f5f5f5;
+        font-size: 14px;
+        div{
+            text-align: center;
+        }
+    }
+    h3{
+        color: #f5f5f5;
+        font-size: 16px;
+        margin: 10px 0px;
+    }
+    .robot{
+        width: auto;
+        height: 120px;
+        display: flex;
+        justify-content: space-around;
+        div{
+            width: 45%;
+            height: 120px;
+            background: #172439;
+            border-radius: 15px;
+            box-sizing: border-box;
+            padding: 20px 15px;
+            span{
+                font-size: 16px;
+                font-weight: 600;
+                color: #f5f5f5;
+            }
+            p{
+                font-size: 12px;
+                font-weight: 600;
+                color: #5F6E87;
+                margin: 10px 0px;
+            }
+        }
+    }
+    .trend{
+        width: auto;
+        height: auto;
+        text-align: center;
+        color: #f5f5f5;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+        div{
+            margin: 5px 0px;
+            button{
+                width: 70px;
+                height: 35px;
+                border: 0;
+                border-radius: 3px;
+                background: #07C160;
+            }
+            .van-col{
+                line-height: 35px;
+            }
+        }
+    }
+}
+
+</style>
