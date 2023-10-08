@@ -1,135 +1,185 @@
 <script setup>
- import { init, dispose,registerLocale   } from "klinecharts";
-import { defineProps, onMounted, onUpdated, ref } from 'vue';
-import {useOkxStore} from "@/stores/okx.js"
-import dataList from "@/myData.js"
+import { onMounted, ref } from "vue";
+import {init,registerLocale } from 'klinecharts'
+import dataList from "@/myData.js";
 
-const okxStore = useOkxStore()
+let klineCharts
+let paneId
 
-const props = defineProps(['time'])
+const theme = ref('dark')
 
-const main  = ref(null)
-
-const chartOptions = ref({
-      // 图表之间的分割线
-  separator: {
-    size: 1,
-    color: '#888888',
-    fill: true,
-    activeBackgroundColor: 'rgba(230, 230, 230, .15)'
-  },
-  // 十字光标
-  crosshair: {
+const option = {
+  grid: {
     show: true,
-    // 十字光标水平线及文字
     horizontal: {
-      show: true,
-      line: {
-        show: true,
-        // 'solid'|'dashed'
-        style: 'dashed',
-        dashedValue: [4, 2],
-        size: 1,
-        color: '#888888'
-      },
+      show: false,
+      size:1,
+      color: '#333',
+      style: 'solid',
+    },
+    vertical: {
+      show: false,
+      size: 1,
+      color: '#333',
+      style: 'solid',
     }
+  },
 }
+
+
+const chartTypes =  [
+        { key: "candle_solid", text: "k线图" },
+          { key: "area", text: "分时图" },
+        ]
+
+registerLocale("zh-HK", {
+  time: "時間：",
+  open: "開：",
+  high: "高：",
+  low: "低：",
+  close: "收：",
+  volume: "成交量：",
 });
 
-let kLineChart
+const mainIndicators = ["MA", "EMA", "SAR"]
+const subIndicators =  ["VOL", "MACD", "KDJ"]
 
-const drawLine = ()=>{
-    kLineChart = init("chart-type-k-line",chartOptions)
-    kLineChart.applyNewData(dataList)
+const isActive = ref(false)
+
+const addActive = ()=>{
+  isActive.value = !isActive.value
 }
 
-const emaData = ref(['EMA','MACD','MA','MACD','EMA','MACD','MA'])
+const drawChart = ()=>{
+  klineCharts = init('chart-type-k-line')
+  klineCharts.applyNewData(dataList)
+  paneId = klineCharts.createIndicator("VOL");
+  klineCharts.setStyles(option)
+}
 
-const chartTypes = ref([
-          { key: "candle_solid", text: "k线图" },
-          { key: "area", text: "分时图" },
-])
+
+const setTheme = (nowTheme)=>{
+  theme.value = nowTheme
+  klineCharts.setStyles(theme);
+}
 
 const setChartType = (type)=>{
-    kLineChart.setStyles({
-          candle: {
-            type,
-          },
-        });
+  klineCharts.setStyles({
+    candle: {
+        type,
+      },
+  })
 }
 
-const choseIndex = ref(0)
-
-const chose = (index)=>{
-    choseIndex.value = index
+const setLanguage = (language)=>{
+  klineCharts.setLocale(language)
 }
 
-const theme = ref('light')
+const setMainIndicator = (name)=>{
+  klineCharts.createIndicator(name, false, { id: "candle_pane" });
+  addActive()
+}
 
-const setTheme = (themeValue) => {
-     theme.value = themeValue; // 更新theme变量
-     kLineChart.setStyles(themeValue === 'dark' ? { background: '#1f2126' } : {}); // 根据用户选择的主题应用样式
- }
+const setSubIndicator = (name)=>{
+  klineCharts.createIndicator(name, false, { id: paneId })
+}
 
-
-
-onUpdated(()=>{
-})
 
 onMounted(()=>{
-    drawLine()
+  drawChart()
 
 })
 
 
+const props = defineProps(['time'])
 </script>
+
+
 
 <template>
     <div class="container">
-        <div id="chart-type-k-line" class="k-line-chart" :style="{ background: theme === 'dark' ? '#1f2126' : '' }"></div>
-        <div class="btn">
-        <span v-for="(item,index) in emaData" :key="index" :class="choseIndex===index?'active':''" @click="chose(index)">{{item}}</span>
+      <div id="chart-type-k-line" class="k-line-chart"  :style="{ backgroundColor: theme === 'dark' ? '#08162D' : '' }"/>
+      <div class="nav">
         <span
           v-for="{ key, text } in chartTypes"
           :key="key"
-          v-on:click="setChartType(key)"
+          @click="setChartType(key)"
         >
-          {{ text }}
+        {{ text }}
         </span>
-        <span @click="setTheme('dark')">深色</span>
-        <span @click="setTheme('light')">浅色</span>
-        </div>
+        <span @click="setTheme('dark')" >深色</span>
+        <span @click="setTheme('light')" >浅色</span>
+        <span @click="setLanguage('zh-CN')" >简体中文</span>
+        <span @click="setLanguage('zh-HK')" >繁體中文</span>
+        <span @click="setLanguage('en-US')" >English</span>
+        <span v-for="(type,index) in mainIndicators" :key="index"
+        :class="isActive?'active':''"
+          @click="setMainIndicator(type)">
+        {{ type }}
+        </span>
+        <span v-for="(type,index) in subIndicators" :key="index"
+        @click="setSubIndicator(type)">
+        {{ type }}
+        </span>
+      </div>
+      <div class="btn">
+        <button class="buy">买入</button>
+        <button class="sell">卖出</button>
+      </div>
     </div>
-    
 </template>
 
-<style scoped lang="scss">
+
+
+<style lang="scss" scoped>
 .container{
-    margin-top: 15px;
+  padding-bottom: 60px;
+  .k-line-chart{
     width: 100%;
-    height: 400px;
-    .k-line-chart{
-        width: 100%;
-        height: 400px;
+    height: 470px;
+    padding: 10px 0px;
+  }
+  .nav{
+    width: 100%;
+    padding: 30px 0px;
+    height: auto;
+    background: #08162D;
+    color: #f5f5f5;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    span{
+      padding: 5px 10px;
+      cursor: pointer;
     }
-    .btn{
-        margin-top: 15px;
-        width: 90%;
-        height: 30px;
-        display: flex;
-        justify-content: space-around;
-        flex-wrap: wrap;
-        color: #c8c7c7;
-        span{
-            display: inline-block;
-            padding: 10px;
-            text-align: center;
-            cursor: pointer;
-            font-size: 12px;
-        }
+  }
+  .btn{
+    width: 100%;
+    height: 60px;
+    background: #08162D;
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    bottom: 15px;
+    left: 0;
+    button{
+      width: 120px;
+      height:40px;
+      border: 0;
+      border-radius: 5px;
     }
-    .active{
-        color: rgb(24, 125, 222);
-    }
+    .buy{
+        background: #1CAD90;
+        color: #fff;
+      }
+      .sell{
+        background: #CD4E65;
+        color: #fff;
+      }
+  }
+}
+.active{
+  color: #187DDE;
 }
 </style>

@@ -10,6 +10,7 @@
 <template>
     <div class="container"> 
         <van-nav-bar
+        style="color: #fff;"
         title="交易"
         left-text="返回"
         left-arrow
@@ -60,21 +61,26 @@
 </template>
 
 <style scoped lang="scss">
+:deep(.van-nav-bar__title){
+    color: white;
+}
+:deep(.van-icon-arrow-left){
+    color: white !important;
+}
+:deep(.van-nav-bar__text){
+    color: white !important;
+}
 .container{
     width: auto;
-    height: 100vh;
+    height: auto;
     .van-nav-bar{
         background: #08162D;
     }
-    .van-ellipsis{
-        color: #ffffff !important;
-    }
-    .van-nav-bar__title{
-        color: #ffffff;
-    }
+   
     .banner{
         width: auto;
         height: 100px;
+        background: #08162D;
         display: flex;
         justify-content: space-around;
         flex-direction: column;
