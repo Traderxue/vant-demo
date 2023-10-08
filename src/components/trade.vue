@@ -63,7 +63,6 @@
 .container{
     width: auto;
     height: 100vh;
-    background: #08162D;
     .van-nav-bar{
         background: #08162D;
     }
@@ -113,7 +112,6 @@
         }
     }
     .van-tabs{
-        background: #08162D;
         width: 100%;
     }
 }
