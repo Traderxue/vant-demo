@@ -12,6 +12,29 @@ const onClickLeft =()=>{
 const onClickRight =()=>{
 
 }
+
+const categorys = ref([
+    {
+        type:"BTC/USDT",
+        price:"29846",
+        parsent:"+1.6%"
+    },
+    {
+        type:"ETH/USDT",
+        price:"1846",
+        parsent:"+0.14%"
+    },
+    {
+        type:"SOL/USDT",
+        price:"24.6",
+        parsent:"+3.5%"
+    },
+    {
+        type:"DOGE/USDT",
+        price:"0.076",
+        parsent:"+2.4%"
+    }
+])
 const images = ref([
       'http://127.0.0.1:5173/banner1.png',
       'http://127.0.0.1:5173/banner2.png',
@@ -19,8 +42,15 @@ const images = ref([
 
 
 
-const toTrade = ()=>{
-    router.push('/trade')
+const toTrade = (item)=>{
+    router.push({
+        path:"/trade",
+        query:{
+            type:item.type,
+            price:item.price,
+            parsent:item.parsent
+        }
+    })
 }
 </script>
 
@@ -96,30 +126,12 @@ const toTrade = ()=>{
                 <van-col span="8">涨跌幅</van-col>
                 </van-row>
             </div>
-            <div @click="toTrade">
+            <div @click="toTrade(item)" v-for="(item,index) in categorys" :key="index">
                 <van-row>
-                <van-col span="8">BTC/USDT</van-col>
-                <van-col span="8">29846.16</van-col>
+                <van-col span="8">{{item.type}}</van-col>
+                <van-col span="8">{{item.price}}</van-col>
                 <van-col span="8">
-                    <button>+1.6%</button>
-                </van-col>
-                </van-row>
-            </div>
-            <div>
-                <van-row>
-                <van-col span="8">ETH/USDT</van-col>
-                <van-col span="8">29846.16</van-col>
-                <van-col span="8">
-                    <button>+1.6%</button>
-                </van-col>
-                </van-row>
-            </div>
-            <div>
-                <van-row>
-                <van-col span="8">BTC/USDT</van-col>
-                <van-col span="8">29846.16</van-col>
-                <van-col span="8">
-                    <button>+1.6%</button>
+                    <button>{{item.price}}</button>
                 </van-col>
                 </van-row>
             </div>

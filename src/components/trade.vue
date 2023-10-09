@@ -1,10 +1,17 @@
 <script setup>
   import { ref } from "vue";
   import kline from "./kline.vue";
+  import { useRoute } from "vue-router";
+  
+  const route = useRoute()
 
+
+  const type = route.query.type
+  const price = route.query.price
 
   const onClickLeft = () => history.back();
   const active = ref(0);
+
 </script>
 
 <template>
@@ -18,13 +25,13 @@
         />
         <div class="banner">
             <div class="top">
-                <p>BTC/USDT</p>
+                <p>{{type}}</p>
                 <span>持仓列表</span>
             </div>
             <div class="bottom">
                 <div>
                     <p>当前价</p>
-                    <span class="span1">27931.14</span>
+                    <span class="span1">{{price}}</span>
                 </div>
                 <div>
                     <p>24H最高</p>
