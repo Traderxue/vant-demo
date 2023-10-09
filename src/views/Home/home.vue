@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import {useRouter} from 'vue-router'
+import i18n from "@/i18n/index";
 
 
 const router = useRouter()
@@ -64,6 +65,10 @@ const toChongzhi = ()=>{
         path:'/chongzhi'
     })
 }
+
+const switchLanguage = (lang)=>{
+    i18n.global.locale = lang;
+}
 </script>
 
 <template>
@@ -73,13 +78,23 @@ const toChongzhi = ()=>{
                 <span class="material-symbols-outlined">
                 menu
                 </span>
-                <p>首页</p>
-                <span class="material-symbols-outlined">
-                public
-                </span>
+                <p>{{$t('home.title')}}</p>
+               
+                <el-dropdown>
+                    <span class="material-symbols-outlined language">
+                        public
+                    </span>
+                <template #dropdown>
+                    <el-dropdown-menu>
+                    <el-dropdown-item @click="switchLanguage('zh')">中文简体</el-dropdown-item>
+                    <el-dropdown-item @click="switchLanguage('zh_hk')">中文繁体</el-dropdown-item>
+                    <el-dropdown-item @click="switchLanguage('en')">English</el-dropdown-item>
+                    </el-dropdown-menu>
+                </template>
+                </el-dropdown>
             </div>
             <div class="hedaer_con">
-                <span>Converted Assets</span>
+                <span>{{$t('home.assets')}}</span>
                 <p>86462.21<span>≈946423.20USD</span></p>
             </div>
         </div>
@@ -101,22 +116,22 @@ const toChongzhi = ()=>{
         <div class="grid">
             <div @click="toChongzhi">
                 <img src="@/assets/img/icon1.png" alt="">
-                <p>充值</p>
+                <p>{{$t('home.Charge')}}</p>
             </div>
             <div @click="toChongzhi">
                 <img src="@/assets/img/icon2.png" alt="">
-                <p>充值</p>
+                <p>{{$t('home.Charge')}}</p>
             </div>
             <div @click="toChongzhi">
                 <img src="@/assets/img/icon3.png" alt="">
-                <p>充值</p>
+                <p>{{$t('home.Charge')}}</p>
             </div>
             <div @click="toChongzhi">
                 <img src="@/assets/img/icon4.png" alt="">
-                <p>充值</p>
+                <p>{{$t('home.Charge')}}</p>
             </div>
         </div>
-        <h3>Quanitfied Robot</h3>
+        <h3>{{$t('home.quantity')}}</h3>
         <div class="robot">
             <div @click="toMarket">
                 <span>25.00</span>
@@ -129,7 +144,7 @@ const toChongzhi = ()=>{
                 <span>BNB</span>
             </div>
         </div>
-        <h3>Market Trend</h3>
+        <h3>{{$t('home.trend')}}</h3>
         <div class="trend">
             <div>
                 <van-row>
@@ -163,7 +178,12 @@ const toChongzhi = ()=>{
         justify-content: space-between;
         font-size: 16px;
         font-weight: 600;
-
+        span{
+            cursor: pointer;
+        }
+    .language{
+        color: #f5f5f5; 
+        }
     }
     .headerbox{
         color: #f5f5f5;
@@ -265,6 +285,9 @@ const toChongzhi = ()=>{
             }
         }
     }
+}
+:focus{
+    outline: none;
 }
 
 </style>
