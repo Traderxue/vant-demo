@@ -32,6 +32,10 @@ const router = createRouter({
     {
       path:"/trade",
       component:()=>import("@/components/trade.vue")
+    },
+    {
+      path:'/chongzhi',
+      component:()=>import("@/components/chongzhi.vue")
     }
     
   ]

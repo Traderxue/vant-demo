@@ -52,6 +52,18 @@ const toTrade = (item)=>{
         }
     })
 }
+
+const toMarket =()=>{
+    router.push({
+        path:'/market'
+    })
+}
+
+const toChongzhi = ()=>{
+    router.push({
+        path:'/chongzhi'
+    })
+}
 </script>
 
 <template>
@@ -87,31 +99,31 @@ const toTrade = (item)=>{
                 />
         </div>
         <div class="grid">
-            <div>
+            <div @click="toChongzhi">
                 <img src="@/assets/img/icon1.png" alt="">
                 <p>充值</p>
             </div>
-            <div>
+            <div @click="toChongzhi">
                 <img src="@/assets/img/icon2.png" alt="">
                 <p>充值</p>
             </div>
-            <div>
+            <div @click="toChongzhi">
                 <img src="@/assets/img/icon3.png" alt="">
                 <p>充值</p>
             </div>
-            <div>
+            <div @click="toChongzhi">
                 <img src="@/assets/img/icon4.png" alt="">
                 <p>充值</p>
             </div>
         </div>
         <h3>Quanitfied Robot</h3>
         <div class="robot">
-            <div>
+            <div @click="toMarket">
                 <span>25.00</span>
                 <p>Monthly Interest Rate</p>
                 <span>BNB</span>
             </div>
-            <div>
+            <div @click="toMarket">
                 <span>25.00</span>
                 <p>Monthly Interest Rate</p>
                 <span>BNB</span>

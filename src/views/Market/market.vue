@@ -82,7 +82,6 @@
     height: 100vh;
     display: flex;
     justify-content: space-between;
-    padding-bottom: 70px;
     .left{
         width: 80px;
     }
