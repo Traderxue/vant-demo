@@ -54,6 +54,8 @@ const toTrade = (item)=>{
     })
 }
 
+const show = ref(false);
+
 const toMarket =()=>{
     router.push({
         path:'/market'
@@ -69,17 +71,28 @@ const toChongzhi = ()=>{
 const switchLanguage = (lang)=>{
     i18n.global.locale = lang;
 }
+
+
+    const showPopup = () => {
+      show.value = true;
+    };
 </script>
 
 <template>
     <div class="container">
         <div class="headerbox">
             <div class="header">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined" @click="showPopup">
                 menu
                 </span>
-                <p>{{$t('home.title')}}</p>
-               
+
+                <van-popup
+                    v-model:show="show"
+                    position="left"
+                    :style="{ width: '40%', height: '100%' }"
+                    >
+                    <div style="color: black;">内容</div>
+                </van-popup>
                 <el-dropdown>
                     <span class="material-symbols-outlined language">
                         public
