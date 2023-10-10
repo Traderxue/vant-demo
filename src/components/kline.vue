@@ -24,6 +24,48 @@ const option = {
       style: 'solid',
     }
   },
+  separator: {
+    size: 1,
+    color: '#6E7888',
+    fill: true,
+    activeBackgroundColor: 'rgba(230, 230, 230, .15)'
+  },
+  xAxis: {
+    show: true,
+    size: 'auto',
+    // x轴线
+    axisLine: {
+      show: true,
+      color: '#6E7888',
+      size: 1
+    },
+    // x轴分割文字
+    tickText: {
+      show: true,
+      color: '#6E7888',
+      family: 'Helvetica Neue',
+      weight: 'normal',
+      size: 12,
+      marginStart: 4,
+      marginEnd: 4
+    },
+  },
+  yAxis: {
+    show: true,
+    size: 'auto',
+    // 'left' | 'right'
+    position: 'right',
+    // 'normal' | 'percentage' | 'log'
+    type: 'normal',
+    inside: false,
+    reverse: false,
+    // y轴线
+    axisLine: {
+      show: true,
+      color: '#6E7888',
+      size: 1
+    },
+  }
 }
 
 
