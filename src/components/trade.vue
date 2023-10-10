@@ -45,22 +45,22 @@
         </div>
         <van-tabs v-model:active="active" color="#187DDE" 
         background="#08162D" title-active-color="#187DDE">
-            <van-tab title="1M">
+            <van-tab :key="1" title="1M">
                 <kline time="1m"/>
             </van-tab>
-            <van-tab title="5M">
+            <van-tab :key="5" title="5M">
                 <kline time="5m"/>
             </van-tab>
-            <van-tab title="15M">
+            <van-tab :key="15" title="15M">
                 <kline time="15m"/>
             </van-tab>
-            <van-tab title="30M">
+            <van-tab :key="30" title="30M">
                 <kline time="30m"/>
             </van-tab>
-            <van-tab title="1H">
+            <van-tab :key="60" title="1H">
                 <kline time="1h"/>
             </van-tab>
-            <van-tab title="4H">
+            <van-tab :key="240" title="4H">
                 <kline time="4h"/>
             </van-tab>
         </van-tabs>
